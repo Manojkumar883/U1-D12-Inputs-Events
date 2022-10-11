@@ -49,6 +49,7 @@
       questions!
     </h2>
   </div>
+  <input type ="color" id="change-color" value="#ff0000" />
   <script>
     /* EXERCISE 1
      Write a function for changing the title of the document in something else.
@@ -87,18 +88,22 @@
     */
     
    const changeUrls = function () {
-       document.getElementById("UsingDifferentLink").href="https://www.google.com";
-       
+     const anchors =document.querySelectorAll("a");
+     for(let anchor of anchors){
+
+         anchor.href="https://www.google.com";
+         anchor.innerText = "This is google link"; 
+     }
 };
-        
+changeUrls();     
     
 
     /* EXERCISE 5
      Write a function for adding a new list item in the second unordered list.
     */
 
+   let ul = document.getElementById("secondList");
     const addToTheSecond = function () {
-        let ul = document.getElementById("secondList");
   let li = document.createElement("li");
   li.appendChild(document.createTextNode("4th"));
   ul.appendChild(li);
@@ -109,14 +114,11 @@
      Write a function for adding a second paragraph to the first div.
     */
    let div = document.createElement("div");
-   let attr = document.createAttribute("changingText");
    let p = document.createElement("p");
 
- const addParagraph = function () {
+ const addParagraph = function (changeContent2) {
 p.classList += 'album'; 
 p.innerHTML = 'This Is Newly Created Paragraph'; 
-attr.value="container";
-changingText.setAttributeNode(attr);
 changingText.appendChild(p); 
 document.body.appendChild(div);
     
@@ -136,43 +138,69 @@ document.body.appendChild(div);
     */
 
     const paintItGreen = function () {
-      //
+      const newBackground = document.getElementsByTagName("ul")
+      for(let i=0; i<newBackground.length; i++){
+        newBackground[i].style.backgroundColor = "green";
+
+      }
+
     };
+    paintItGreen();
 
     /* EXERCISE 9
      Make the heading of the page change color every time the user clicks on it.
     */
-
+ const getrandomnumber = function(){
+    return Math.floor(Math.random() * 256);
+ }
+ const getrandomcolor = function (){
+return `rgb(${getrandomnumber()};${getrandomnumber()};${getrandomnumber()})`;
+ }
     const makeItClickable = function () {
-      //
+      
+    let title = document.getElementsByTagName("h1")
+    title.addEventListener("click", () => {
+        title.style.color = getrandomcolor()
+    });
     };
-
     /* EXERCISE 10
      Change the footer text with something else when the user clicks on it.
     */
 
     const changeFooterText = function () {
-      //
+      const footer = document.getElementsByTagName("h2")
+      let footer1= footer[footer.lenght-1]
+      console.log(footer)
+      footer.addEventListener("click", () => {
+        footer.innerText = "changing the footer content"
+      })
     };
 
     /* EXERCISE 11
      Attach an event listener to the input field in the page that changes the text of the page's subtitle
     */
 
+   const subtitle = document.getElementsByTagName("h2")
     const inputField = document.getElementById("input-field");
-    // ...
+         inputField.addEventListener("keyup",(event) => {
+            let text = event.target.value
+            subtitle.innerText = "changingSubtitle"
+     })
 
-    window.onload = function () {
-      //
-    };
 
     /* EXERCISE 13
      Use HTML5 tags to properly provide semantic meaning to the different portions of the page.
     */
 
+    
     /* ### EXTRA ###  EXERCISE 14
      Create an input of type "color" and use it to change the color of the subtitle
-    */
+    */ 
+   const inputColor = document.getElementById("change-color")
+    inputColor.addEventListener("change", (event) => {
+        let color = event.target.value
+        subtitle.style.color = "color"
+    })
   </script>
 </body>
 
